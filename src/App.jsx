@@ -2,7 +2,7 @@ import './App.css';
 import './index.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar, ScrollToTop } from './components';
-import { Home, NoteDisplay } from './pages';
+import { Home, NoteDisplay, CategoryDisplay } from './pages';
 
 
 function App() {
@@ -15,9 +15,11 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/notes/:id" element={<NoteDisplay />} />
+            <Route path="/category/:category" element={<CategoryDisplay />} />
+            <Route path="/notes/:noteId" element={<NoteDisplay />} />
 
           </Routes>
+
         </main>
 
       </Router>
