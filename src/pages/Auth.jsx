@@ -3,15 +3,16 @@ import { useNavigate } from 'react-router-dom';
 
 export const Auth = () => {
   const navigate = useNavigate();
-  const [email, setEmail]         = useState('');
-  const [password, setPassword]   = useState('');
-  const [username, setUsername]   = useState('');
-  const [error, setError]         = useState('');
-  const [isLogin, setIsLogin]     = useState(true); 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState('');
+  const [error, setError] = useState('');
+  const [isLogin, setIsLogin] = useState(true);
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  console.log('API URL:', apiUrl);
   
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) navigate('/');
@@ -88,15 +89,22 @@ export const Auth = () => {
           />
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 relative">
           <label className="block text-sm font-semibold mb-1">Password</label>
           <input
-            type="password"
-            className="w-full border px-3 py-2 rounded-md"
+            type={showPassword ? "text" : "password"}
+            className="w-full border px-3 py-2 rounded-md pr-10"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-9 text-sm text-blue-600"
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
         </div>
 
         <button

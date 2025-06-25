@@ -12,31 +12,19 @@ function App() {
     <>
       <Router>
         <ScrollToTop />
-        <Navbar />
-        <main className='pt-20'>
+        
 
           <Routes>
             <Route path="/login" element={<Auth />} />
 
-            <Route path="/" element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            } />
-            <Route path="/category/:category" element={
-              <ProtectedRoute>
-                <CategoryDisplay />
-              </ProtectedRoute>
-            } />
-            <Route path="/notes/:noteId" element={
-              <ProtectedRoute>
-                <NoteDisplay />
-              </ProtectedRoute>
-            } />
+    
+            {/* protected routes from login */}
+            <Route path="/" element={ <ProtectedRoute> <Navbar /> <Home /> </ProtectedRoute>} />
+            <Route path="/category/:category" element={ <ProtectedRoute> <Navbar /> <CategoryDisplay /> </ProtectedRoute>} />
+            <Route path="/notes/:noteId" element={ <ProtectedRoute> <Navbar /> <NoteDisplay /> </ProtectedRoute>} />
 
           </Routes>
 
-        </main>
 
       </Router>
 
