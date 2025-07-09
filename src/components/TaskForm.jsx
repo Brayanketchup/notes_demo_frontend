@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 
 
-export const NoteForm = ( { setShowAddNoteForm, notes, setNotes } ) => {
+export const TaskForm = ( { setShowAddTaskForm, tasks, setTasks } ) => {
 
 
     const [selectedTags, setSelectedTags] = useState([]);
@@ -17,28 +17,28 @@ export const NoteForm = ( { setShowAddNoteForm, notes, setNotes } ) => {
         console.log("Selected tags:", selected);
     };
 
-    const handleAddNote = async (e) => {
+    const handleAddtask = async (e) => {
         e.preventDefault();
         if (!title.trim()) return;
 
-        const noteData = { title, content, tags: selectedTags };
+        const taskData = { title, content, tags: selectedTags };
 
         try {
-            const res = await fetch(apiUrl + '/api/notes', {
+            const res = await fetch(apiUrl + '/api/tasks', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(noteData),
+                body: JSON.stringify(taskData),
             });
 
             const data = await res.json();
             if (res.ok) {
-                setNotes([data, ...notes]);
+                setTasks([data, ...tasks]);
                 setTitle('');
                 setContent('');
                 setSelectedTags([]);
-                setShowAddNoteForm(false);
+                setShowAddTaskForm(false);
             } else {
-                console.error('Failed to add note:', data.error);
+                console.error('Failed to add task:', data.error);
             }
         } catch (err) {
             console.error('Error submitting form:', err);
@@ -50,10 +50,10 @@ export const NoteForm = ( { setShowAddNoteForm, notes, setNotes } ) => {
 
     return (
         <form
-            onSubmit={handleAddNote}
+            onSubmit={handleAddtask}
             className="bg-white p-6 rounded-lg shadow-md mb-8 mt-6"
         >
-            <h2 className="text-xl font-semibold mb-4">New Note</h2>
+            <h2 className="text-xl font-semibold mb-4">New task</h2>
 
             <div className="mb-4">
                 <label className="block text-sm font-medium mb-1">Title</label>
@@ -96,7 +96,7 @@ export const NoteForm = ( { setShowAddNoteForm, notes, setNotes } ) => {
                 type="submit"
                 className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
             >
-                Save Note
+                Save task
             </button>
         </form>
     )

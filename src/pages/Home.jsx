@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { NoteCard, NoteForm } from '../components'
 import { NOTES } from '../constants/Notes'
 import { fetchNotes } from '../utils/index.js';
+import { Navbar } from '../components';
 
 export const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -26,7 +27,8 @@ export const Home = () => {
 
 
   return (
-    <section>
+    <section className='sectionWithNavbar'>
+      <Navbar/>
       <div className="container mx-auto px-4">
         <div>
           <h1 className="text-3xl font-bold text-center my-8">Welcome to Your Notes</h1>

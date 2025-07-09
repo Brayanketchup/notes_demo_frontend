@@ -16,3 +16,7 @@ code {
   /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace; */
 }
+
+.sectionWithNavbar {
+  @apply flex relative flex-row bg-[#e3e8f9] min-h-[100vh];
+}
