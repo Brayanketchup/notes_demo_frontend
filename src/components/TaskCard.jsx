@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-export const NoteCard = ({ Note }) => {
+export const TaskCard = ({ Task }) => {
 
     const apiUrl = process.env.REACT_APP_API_URL;
     const [isEditing, setIsEditing] = useState(false);
-    const [editedTitle, setEditedTitle] = useState(Note.title);
-    const [editedContent, setEditedContent] = useState(Note.content);
+    const [editedTitle, setEditedTitle] = useState(Task.title);
+    const [editedContent, setEditedContent] = useState(Task.content);
 
 
     const getDaysAgo = (date) => {
@@ -18,7 +18,7 @@ export const NoteCard = ({ Note }) => {
 
     const handleSave = async () => {
         try {
-            const response = await fetch(`${apiUrl}/api/notes/${Note._id}`, {
+            const response = await fetch(`${apiUrl}/api/tasks/${Task._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -31,11 +31,11 @@ export const NoteCard = ({ Note }) => {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                console.error('Error updating note:', errorData.error);
+                console.error('Error updating task:', errorData.error);
                 return;
             }
 
-            const updatedNote = await response.json();
+            const updatedTask = await response.json();
 
             setIsEditing(false);
             window.location.reload();
@@ -48,25 +48,24 @@ export const NoteCard = ({ Note }) => {
     };
 
     const handleCancel = () => {
-        setEditedTitle(Note.title);
-        setEditedContent(Note.content);
+        setEditedTitle(Task.title);
+        setEditedContent(Task.content);
         setIsEditing(false);
     };
 
     const handleDelete = async () => {
-        if (!window.confirm('Are you sure you want to delete this note?')) return;
+        if (!window.confirm('Are you sure you want to delete this task?')) return;
 
         try {
-            const response = await fetch(`${apiUrl}/api/notes/${Note._id}`, {
+            const response = await fetch(`${apiUrl}/api/tasks/${Task._id}`, {
                 method: 'DELETE',
             });
 
             if (!response.ok) {
                 const errorData = await response.json();
-                console.error('Error deleting note:', errorData.error);
+                console.error('Error deleting task:', errorData.error);
                 return;
             }
-
             window.location.reload();
 
         } catch (error) {
@@ -79,7 +78,7 @@ export const NoteCard = ({ Note }) => {
     return (
 
 
-        <div id={`note-${Note.id}`} className="bg-white shadow-md rounded-lg p-6 mb-4">
+        <div id={`task-${Task.id}`} className="bg-white shadow-md rounded-lg p-6 mb-4">
             {isEditing ? (
                 <>
                     <input
@@ -96,17 +95,17 @@ export const NoteCard = ({ Note }) => {
                 </>
             ) : (
                 <>
-                    <h2 className="text-xl font-semibold mb-2">{Note.title}</h2>
-                    <p className="text-gray-700">{Note.content}</p>
+                    <h2 className="text-xl font-semibold mb-2">{Task.title}</h2>
+                    <p className="text-gray-700">{Task.content}</p>
                 </>
             )}
 
             <div className="mt-4 flex justify-between items-center">
-                <span className="text-sm text-gray-500">{getDaysAgo(Note.createdAt)}</span>
+                <span className="text-sm text-gray-500">{getDaysAgo(Task.createdAt)}</span>
             </div>
 
             <div className="mt-4 flex justify-between items-center">
-                <a href={`/notes/${Note.id}`} className="text-blue-500 hover:text-blue-700">View Note</a>
+                <a href={`/tasks/${Task.id}`} className="text-blue-500 hover:text-blue-700">View Task</a>
                 <div className="flex flex-row gap-2">
                     {isEditing ? (
                         <>

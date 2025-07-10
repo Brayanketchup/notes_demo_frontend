@@ -51,45 +51,31 @@ export const NoteForm = ( { setShowAddNoteForm, notes, setNotes } ) => {
     return (
         <form
             onSubmit={handleAddNote}
-            className="bg-white p-6 rounded-lg shadow-md mb-8 mt-6"
+            className=" p-6 rounded-lg shadow-md mb-8 mt-6 bg-[#f1f2f6] "
         >
             <h2 className="text-xl font-semibold mb-4">New Note</h2>
 
-            <div className="mb-4">
-                <label className="block text-sm font-medium mb-1">Title</label>
+            <div className="mb-4 ">
+                {/* <label className="block text-sm font-medium mb-1">Title</label> */}
                 <input
                     type="text"
                     value={title}
+                    placeholder="Title"
                     onChange={(e) => setTitle(e.target.value)}
-                    className="w-full border px-3 py-2 rounded-md"
+                    className="bg-[#f1f2f6] border-none w-full border px-3 py-2 rounded-md placeholder-[#4a5a80]"
                     required
                 />
             </div>
 
             <div className="mb-4">
-                <label className="block text-sm font-medium mb-1">Content</label>
+                {/* <label className="block text-sm font-medium mb-1">Content</label> */}
                 <textarea
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    className="w-full border px-3 py-2 rounded-md"
+                    placeholder="Take a note..."
+                    className="bg-[#f1f2f6] border-none w-full border px-3 py-2 rounded-md placeholder-[#4a5a80] resize-none"
                     rows="4"
                 ></textarea>
-            </div>
-
-            <div className="mb-4">
-                <label className="block text-sm font-medium mb-1">Tags</label>
-                <select
-                    multiple
-                    value={selectedTags}
-                    onChange={handleTagChange}
-                    className="w-full border px-3 py-2 rounded-md text-black"
-                >
-                    <option value="Work">Work</option>
-                    <option value="Personal">Personal</option>
-                    <option value="Urgent">Urgent</option>
-                    <option value="Ideas">Ideas</option>
-                    <option value="Reference">Reference</option>
-                </select>
             </div>
 
             <button

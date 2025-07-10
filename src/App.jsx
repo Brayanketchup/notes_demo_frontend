@@ -25,7 +25,7 @@ function App() {
           
           <Route path="/" element={<ProtectedRoute>  <Home /> </ProtectedRoute>} />
           <Route path="/category/:category" element={<ProtectedRoute>  <CategoryDisplay /> </ProtectedRoute>} />
-          <Route path="/notes/:noteId" element={<ProtectedRoute>  <NoteDisplay /> </ProtectedRoute>} />
+          <Route path="/Notes" element={<ProtectedRoute>  <NoteDisplay /> </ProtectedRoute>} />
           <Route path="/Task" element={<ProtectedRoute>  <Task /> </ProtectedRoute>} />
         </Routes>
 
