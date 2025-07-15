@@ -55,7 +55,7 @@ export const Navbar = () => {
                     <li className='bg-[#203562] hover:bg-[#182747] transition-colors duration-150 ease-in-out p-1 rounded-lg'><a href="/Notes" className='flex flex-row gap-2 p-1 text-white h-[30px]'> <img src="/description.svg" alt="" className='p-1' /> <h1>Notes</h1> </a> </li>
                     <li className='bg-[#203562] hover:bg-[#182747] transition-colors duration-150 ease-in-out p-1 rounded-lg'><a href="/Task" className='flex flex-row gap-2 p-1 text-white h-[30px]'> <img src="/task_alt.svg" alt="" className='p-1' /> <h1>Task</h1> </a> </li>
                     <li className='bg-[#203562] hover:bg-[#182747] transition-colors duration-150 ease-in-out p-1 rounded-lg'><a href="/" className='flex flex-row gap-2 p-1 text-white h-[30px]'> <img src="/archive.svg" alt="" className='p-1' /> <h1>Archive</h1> </a> </li>
-                    <li className='bg-[#203562] hover:bg-[#182747] transition-colors duration-150 ease-in-out p-1 rounded-lg'><a href="/" className='flex flex-row gap-2 p-1 text-white h-[30px]'> <img src="/delete.svg" alt="" className='p-1' /> <h1>Bin</h1> </a> </li>
+                    <li className='bg-[#203562] hover:bg-[#182747] transition-colors duration-150 ease-in-out p-1 rounded-lg'><a href="/Deleted" className='flex flex-row gap-2 p-1 text-white h-[30px]'> <img src="/delete.svg" alt="" className='p-1' /> <h1>Bin</h1> </a> </li>
                     <li>
                         {/* Logout Button */}
                         <button
@@ -87,7 +87,7 @@ export const Navbar = () => {
                         <li className='bg-[#203562] hover:bg-[#182747] transition-colors duration-150 ease-in-out p-1 rounded-lg'><a href="/Notes" className='flex flex-row gap-2 p-1 text-white h-[30px]'> <img src="/description.svg" alt="" className='p-1' /> <h1>Notes</h1> </a> </li>
                         <li className='bg-[#203562] hover:bg-[#182747] transition-colors duration-150 ease-in-out p-1 rounded-lg'><a href="/Task" className='flex flex-row gap-2 p-1 text-white h-[30px]'> <img src="/task_alt.svg" alt="" className='p-1' /> <h1>Task</h1> </a> </li>
                         <li className='bg-[#203562] hover:bg-[#182747] transition-colors duration-150 ease-in-out p-1 rounded-lg'><a href="/" className='flex flex-row gap-2 p-1 text-white h-[30px]'> <img src="/archive.svg" alt="" className='p-1' /> <h1>Archive</h1> </a> </li>
-                        <li className='bg-[#203562] hover:bg-[#182747] transition-colors duration-150 ease-in-out p-1 rounded-lg'><a href="/" className='flex flex-row gap-2 p-1 text-white h-[30px]'> <img src="/delete.svg" alt="" className='p-1' /> <h1>Bin</h1> </a> </li>
+                        <li className='bg-[#203562] hover:bg-[#182747] transition-colors duration-150 ease-in-out p-1 rounded-lg'><a href="/Deleted" className='flex flex-row gap-2 p-1 text-white h-[30px]'> <img src="/delete.svg" alt="" className='p-1' /> <h1>Bin</h1> </a> </li>
                         <li>
                             {/* Logout Button */}
                             <button

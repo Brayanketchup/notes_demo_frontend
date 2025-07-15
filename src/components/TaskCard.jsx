@@ -57,8 +57,8 @@ export const TaskCard = ({ Task }) => {
         if (!window.confirm('Are you sure you want to delete this task?')) return;
 
         try {
-            const response = await fetch(`${apiUrl}/api/tasks/${Task._id}`, {
-                method: 'DELETE',
+            const response = await fetch(`${apiUrl}/api/tasks/${Task._id}/delete`, {
+                method: 'PATCH',
             });
 
             if (!response.ok) {

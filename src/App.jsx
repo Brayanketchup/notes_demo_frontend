@@ -2,7 +2,7 @@ import './App.css';
 import './index.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar, ScrollToTop } from './components';
-import { Home, NoteDisplay, CategoryDisplay, Auth, Task } from './pages';
+import { Home, NoteDisplay, CategoryDisplay, Auth, Task, Deleted } from './pages';
 import ProtectedRoute from './components/ProtectedRoute';
 
 
@@ -27,6 +27,7 @@ function App() {
           <Route path="/category/:category" element={<ProtectedRoute>  <CategoryDisplay /> </ProtectedRoute>} />
           <Route path="/Notes" element={<ProtectedRoute>  <NoteDisplay /> </ProtectedRoute>} />
           <Route path="/Task" element={<ProtectedRoute>  <Task /> </ProtectedRoute>} />
+          <Route path="/Deleted" element={<ProtectedRoute>  <Deleted /> </ProtectedRoute>} />
         </Routes>
 
 

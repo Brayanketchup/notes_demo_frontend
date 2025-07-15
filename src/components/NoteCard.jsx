@@ -53,26 +53,47 @@ export const NoteCard = ({ Note }) => {
         setIsEditing(false);
     };
 
+    // const handleDelete = async () => {
+    //     if (!window.confirm('Are you sure you want to delete this note?')) return;
+
+    //     try {
+    //         const response = await fetch(`${apiUrl}/api/notes/${Note._id}`, {
+    //             method: 'DELETE',
+    //         });
+
+    //         if (!response.ok) {
+    //             const errorData = await response.json();
+    //             console.error('Error deleting note:', errorData.error);
+    //             return;
+    //         }
+
+    //         window.location.reload();
+
+    //     } catch (error) {
+    //         console.error('Network or server error while deleting:', error);
+    //     }
+    // };
     const handleDelete = async () => {
         if (!window.confirm('Are you sure you want to delete this note?')) return;
 
         try {
-            const response = await fetch(`${apiUrl}/api/notes/${Note._id}`, {
-                method: 'DELETE',
+            const response = await fetch(`${apiUrl}/api/notes/${Note._id}/delete`, {
+                method: 'PATCH', 
             });
 
             if (!response.ok) {
                 const errorData = await response.json();
-                console.error('Error deleting note:', errorData.error);
+                console.error('Error soft-deleting note:', errorData.error);
                 return;
             }
 
-            window.location.reload();
+            window.location.reload(); 
 
         } catch (error) {
-            console.error('Network or server error while deleting:', error);
+            console.error('Network or server error while soft-deleting:', error);
         }
     };
+
 
 
 
