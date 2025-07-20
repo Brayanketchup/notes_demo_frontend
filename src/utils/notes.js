@@ -48,4 +48,20 @@ export const fetchDeletedNotes = async () => {
     };
     
 
+    // archive notes 
+export const fetchArchiveNotes = async () => {
+      try {
+        const res = await fetch(apiUrl + '/api/notes/archived');
+        const data = await res.json();
+        if (res.ok) {
+          return data;
+        } else {
+          console.error('Failed to fetch notes:', data.error);
+        }
+      } catch (err) {
+        console.error('Error fetching notes:', err);
+      }
+    };
+    
+
   

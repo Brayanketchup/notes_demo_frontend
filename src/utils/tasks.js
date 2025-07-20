@@ -34,16 +34,19 @@ export const fetchDeletedTasks = async () => {
 };
 
 
-// export const fetchDeletedTasks = async () => {
-//   try {
-//     const res = await fetch(apiUrl + '/api/task');
-//     const data = await res.json();
-//     if (res.ok) {
-//       return data;
-//     } else {
-//       console.error('Failed to fetch notes:', data.error);
-//     }
-//   } catch (err) {
-//     console.error('Error fetching notes:', err);
-//   }
-// };
+export const fetchArchiveTasks = async () => { 
+  try {
+    const res = await fetch(apiUrl + '/api/tasks/archived');
+    const data = await res.json();
+    if (res.ok) {
+      return data;
+    } else {
+      console.error('Failed to fetch notes:', data.error);
+    }
+  } catch (err) {
+    console.error('Error fetching notes:', err);
+  }
+};
+
+
+

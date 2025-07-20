@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 
 export const TaskCard = ({ Task }) => {
-
     const apiUrl = process.env.REACT_APP_API_URL;
     const [isEditing, setIsEditing] = useState(false);
-    const [editedTitle, setEditedTitle] = useState(Task.title);
-    const [editedContent, setEditedContent] = useState(Task.content);
-
+    const [editedTask, setEditedTask] = useState(Task.task);
 
     const getDaysAgo = (date) => {
         const now = new Date();
@@ -16,6 +13,16 @@ export const TaskCard = ({ Task }) => {
         return diffDays === 0 ? 'Today' : `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
     };
 
+    const formatDeadline = (deadline) => {
+        if (!deadline) return 'No deadline';
+        const date = new Date(deadline);
+        return date.toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        });
+    };
+
     const handleSave = async () => {
         try {
             const response = await fetch(`${apiUrl}/api/tasks/${Task._id}`, {
@@ -23,10 +30,7 @@ export const TaskCard = ({ Task }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    title: editedTitle,
-                    content: editedContent,
-                }),
+                body: JSON.stringify({ task: editedTask }),
             });
 
             if (!response.ok) {
@@ -35,21 +39,16 @@ export const TaskCard = ({ Task }) => {
                 return;
             }
 
-            const updatedTask = await response.json();
-
+            await response.json();
             setIsEditing(false);
             window.location.reload();
-
-
-
         } catch (error) {
             console.error('Network or server error while updating:', error);
         }
     };
 
     const handleCancel = () => {
-        setEditedTitle(Task.title);
-        setEditedContent(Task.content);
+        setEditedTask(Task.task);
         setIsEditing(false);
     };
 
@@ -67,61 +66,71 @@ export const TaskCard = ({ Task }) => {
                 return;
             }
             window.location.reload();
-
         } catch (error) {
             console.error('Network or server error while deleting:', error);
         }
     };
 
-
-
     return (
-
-
-        <div id={`task-${Task.id}`} className="bg-white shadow-md rounded-lg p-6 mb-4">
+        <div id={`task-${Task._id}`} className="bg-white shadow-md rounded-2xl p-6 mb-6 border border-gray-200">
             {isEditing ? (
-                <>
-                    <input
-                        type="text"
-                        className="w-full border px-3 py-2 rounded-md mb-2"
-                        value={editedTitle}
-                        onChange={(e) => setEditedTitle(e.target.value)}
-                    />
-                    <textarea
-                        className="w-full border px-3 py-2 rounded-md mb-2"
-                        value={editedContent}
-                        onChange={(e) => setEditedContent(e.target.value)}
-                    />
-                </>
+                <input
+                    type="text"
+                    className="w-full border px-3 py-2 rounded-md mb-4"
+                    value={editedTask}
+                    onChange={(e) => setEditedTask(e.target.value)}
+                    placeholder="Edit task name..."
+                />
             ) : (
-                <>
-                    <h2 className="text-xl font-semibold mb-2">{Task.title}</h2>
-                    <p className="text-gray-700">{Task.content}</p>
-                </>
+                <h2 className="text-xl font-semibold text-gray-800 mb-2">{Task.task}</h2>
             )}
 
-            <div className="mt-4 flex justify-between items-center">
-                <span className="text-sm text-gray-500">{getDaysAgo(Task.createdAt)}</span>
+            <div className="text-sm text-gray-500 mb-2">
+                Created: {getDaysAgo(Task.createdAt)}
             </div>
 
-            <div className="mt-4 flex justify-between items-center">
-                <a href={`/tasks/${Task.id}`} className="text-blue-500 hover:text-blue-700">View Task</a>
-                <div className="flex flex-row gap-2">
+            <div className="text-sm text-gray-500 mb-4">
+                Deadline: <span className="font-medium text-gray-700">{formatDeadline(Task.deadline)}</span>
+            </div>
+
+            <div className="flex justify-between items-center mt-4">
+                <a
+                    href={`/tasks/${Task._id}`}
+                    className="text-sm text-blue-500 hover:underline"
+                >
+                    View Task
+                </a>
+
+                <div className="flex gap-3">
                     {isEditing ? (
                         <>
-                            <button onClick={handleSave} className="text-green-500 hover:text-green-700">Save</button>
-                            <button onClick={handleCancel} className="text-gray-500 hover:text-gray-700">Cancel</button>
+                            <button
+                                onClick={handleSave}
+                                className="text-sm px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                            >
+                                Save
+                            </button>
+                            <button
+                                onClick={handleCancel}
+                                className="text-sm px-3 py-1 bg-gray-400 text-white rounded hover:bg-gray-500"
+                            >
+                                Cancel
+                            </button>
                         </>
                     ) : (
-                        <button onClick={() => setIsEditing(true)} className="text-yellow-500 hover:text-yellow-700">Edit</button>
+                        <button
+                            onClick={() => setIsEditing(true)}
+                            className="text-sm px-3 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500"
+                        >
+                            Edit
+                        </button>
                     )}
                     <button
                         onClick={handleDelete}
-                        className="text-red-500 hover:text-red-700"
+                        className="text-sm px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
                     >
-                        Delete
+                        Deletec
                     </button>
-
                 </div>
             </div>
         </div>

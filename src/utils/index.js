@@ -1,7 +1,7 @@
 
 
-import { fetchNotes, fetchNotesById, fetchDeletedNotes } from './notes.js';
-import { fetchTasks, fetchDeletedTasks } from './tasks.js';
+import { fetchNotes, fetchNotesById, fetchDeletedNotes, fetchArchiveNotes } from './notes.js';
+import { fetchTasks, fetchDeletedTasks, fetchArchiveTasks } from './tasks.js';
 
 
 
@@ -10,5 +10,7 @@ export  {
     fetchNotesById,
     fetchDeletedNotes,
     fetchTasks,
-    fetchDeletedTasks
+    fetchDeletedTasks,
+    fetchArchiveTasks,
+    fetchArchiveNotes
 }

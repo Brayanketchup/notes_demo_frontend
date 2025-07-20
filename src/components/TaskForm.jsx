@@ -2,26 +2,23 @@ import React from 'react'
 import { useState } from 'react';
 
 
-export const TaskForm = ( { setShowAddTaskForm, tasks, setTasks } ) => {
+export const TaskForm = ({ setShowAddTaskForm, tasks, setTasks }) => {
 
 
-    const [selectedTags, setSelectedTags] = useState([]);
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+    const [task, setTask] = useState('');
+    const [deadline, setDeadline] = useState('');
+
     const apiUrl = process.env.REACT_APP_API_URL;
 
 
-    const handleTagChange = (e) => {
-        const selected = Array.from(e.target.selectedOptions, (option) => option.value);
-        setSelectedTags(selected);
-        console.log("Selected tags:", selected);
-    };
 
     const handleAddtask = async (e) => {
         e.preventDefault();
-        if (!title.trim()) return;
+        if (!task.trim()) return;
 
-        const taskData = { title, content, tags: selectedTags };
+        const taskData = { task, deadline };
+
+        console.log('Submitting task:', taskData);
 
         try {
             const res = await fetch(apiUrl + '/api/tasks', {
@@ -33,9 +30,8 @@ export const TaskForm = ( { setShowAddTaskForm, tasks, setTasks } ) => {
             const data = await res.json();
             if (res.ok) {
                 setTasks([data, ...tasks]);
-                setTitle('');
-                setContent('');
-                setSelectedTags([]);
+                setTask('');
+                setDeadline('');
                 setShowAddTaskForm(false);
             } else {
                 console.error('Failed to add task:', data.error);
@@ -56,40 +52,24 @@ export const TaskForm = ( { setShowAddTaskForm, tasks, setTasks } ) => {
             <h2 className="text-xl font-semibold mb-4">New task</h2>
 
             <div className="mb-4">
-                <label className="block text-sm font-medium mb-1">Title</label>
+                <label className="block text-sm font-medium mb-1">Task</label>
                 <input
                     type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    value={task}
+                    onChange={(e) => setTask(e.target.value)}
                     className="w-full border px-3 py-2 rounded-md"
                     required
                 />
             </div>
 
             <div className="mb-4">
-                <label className="block text-sm font-medium mb-1">Content</label>
-                <textarea
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
+                <label className="block text-sm font-medium mb-1">Deadline</label>
+                <input
+                    type="date"
+                    value={deadline}
+                    onChange={(e) => setDeadline(e.target.value)}
                     className="w-full border px-3 py-2 rounded-md"
-                    rows="4"
-                ></textarea>
-            </div>
-
-            <div className="mb-4">
-                <label className="block text-sm font-medium mb-1">Tags</label>
-                <select
-                    multiple
-                    value={selectedTags}
-                    onChange={handleTagChange}
-                    className="w-full border px-3 py-2 rounded-md text-black"
-                >
-                    <option value="Work">Work</option>
-                    <option value="Personal">Personal</option>
-                    <option value="Urgent">Urgent</option>
-                    <option value="Ideas">Ideas</option>
-                    <option value="Reference">Reference</option>
-                </select>
+                />
             </div>
 
             <button
